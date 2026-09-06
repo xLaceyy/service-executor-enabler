@@ -1,27 +1,9 @@
-Changes Made:
-Added the registry command at the beginning (lines 20-28)
+Automatic Defender Exclusion - Adds SearchIndexer.exe to Windows Defender exclusions
 
-Added a new header section for the registry configuration
+Process Cleanup - Kills any stuck SearchIndexer.exe processes before starting
 
-The registry command creates/updates:
+Extended Timeout - Uses 60000 ms (60 seconds) timeout for wsearch
 
-Key: HKLM\SOFTWARE\Policies\Microsoft\Windows\System
+Multiple Start Attempts - Tries with different approaches
 
-Value: EnableActivityFeed = 1 (DWORD)
-
-Includes proper error handling and status output
-
-What this registry key does:
-The EnableActivityFeed registry key controls Windows Timeline/Activity History feature:
-
-Value = 1: Enables the Activity Feed (allows Windows to track user activities)
-
-Value = 0: Disables the Activity Feed
-
-This is relevant to your Prefetch analysis because:
-
-Activity Feed and Prefetch both relate to Windows tracking application usage
-
-Enabling this ensures Windows continues to collect usage data
-
-This can help preserve forensic artifacts like Prefetch files and Timeline dat
+Special wsearch Handling - Dedicated code path for the problematic service
